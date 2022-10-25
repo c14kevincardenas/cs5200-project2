@@ -1,31 +1,29 @@
 import pandas as pd 
 
 
-def get_seconds(filename):
+def get_data(filename):
     with open(filename) as f:
             lines = f.readlines()
             first_line = True
             for i, line in enumerate(lines):
                 if first_line:
                     first_line = False
-                else: 
-                     if line.split()[0] == 'simSeconds':
-                        return float(line.split()[1])
+                elif line.split() != []:
+                    if line.split()[0] == 'simSeconds':
+                        seconds = float(line.split()[1])
+                    elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
+                        l1d_miss =  float(line.split()[1])
+                    elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
+                        l1i_miss =  float(line.split()[1])
+    return seconds, l1d_miss, l1i_miss
 
 
-def get_instructions(filename):
-	pass
-
-
-def get_l1_misses(filename):
-	pass
-
-
-def fill_data(data, time, reads, writes, l1_miss, part, cpu, fu, op_lat):
+def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_lat):
     data['time'].append(time)
     data['reads'].append(reads)
     data['writes'].append(writes)
-    data['l1_miss'].append(l1_miss)
+    data['l1d_miss'].append(l1d_miss)
+    data['l1i_miss'].append(l1i_miss)
     data['part'].append(part)
     data['cpu'].append(cpu)
     data['fu'].append(fu)
@@ -33,7 +31,7 @@ def fill_data(data, time, reads, writes, l1_miss, part, cpu, fu, op_lat):
 
 
 # function to compile the data from part folders into a dictionary and return a dataframe
-def get_data():
+def make_df():
     pqs = ['null', 'linklist', 'minheap']
     parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     fus = ['base', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
@@ -43,7 +41,8 @@ def get_data():
     data = {'time': [],
     		'reads': [],
     		'writes': [],
-    		'l1_miss': [],
+        'l1d_miss': [],
+    		'l1i_miss': [],
     		'part': [],
     		'cpu': [],
     		'fu': [],
@@ -61,7 +60,7 @@ def get_data():
     				# time = get_seconds(filename)
                 # reads, writes = get_instructions(filename)
                 # l1_miss = get_l1_misses(filename)
-    				# fill_data(data, time, reads, writes, l1_miss, p, 'TimingSimpleCPU', 'none', 'none')
+    				# fill_data(data, time, reads, writes, l1d_miss, l1i_miss, p, 'TimingSimpleCPU', 'none', 'none')
             elif p == 'p3':
                 for fu in fus:
                     filename = 'output/' + p + '/' + fu + '/' + pq + '_stats.txt'
@@ -87,4 +86,5 @@ def get_data():
     # return df
 
 if __name__ == '__main__':
-    get_data()
+    make_df()
+    print(get_data('example_stats.txt'))
