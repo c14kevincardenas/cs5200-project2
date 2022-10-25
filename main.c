@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
   int i;
-  const int n = 1000;
+  const int n = 10000;
   double *v = malloc(sizeof(double)*n);
   double **p = malloc(sizeof(double*)*n);
   pq *mypq;
