@@ -1,8 +1,6 @@
 # CS 5200 Computer Architecture - Project 2
 
-## Item 1
-
-### How to compile the code
+## How to compile the code
 
 To compile the `main.c` code, we need to have a pq-*.c added to the command like, for example:
 
@@ -15,9 +13,10 @@ In this way the program knows what implementation of `pq` to use. That can be ch
 It's also necessary to compile inside the Linux machine we have `gem5` installed, for future references to its code and also to make sure it works on the machine.
 
 
-### How to structure the output data
+## How to structure the output data
 Here is my proposed file structure. This file structure will be found under the gem5 folder in the virtual machine. 
 
+```
 output
 |   |p1
 |   |   |null_stats.py
@@ -180,3 +179,4 @@ output
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.py
 |   |   |	|minheap_config.ini
+```
