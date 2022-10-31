@@ -1,4 +1,5 @@
 import pandas as pd 
+import random
 
 
 def get_data(filename):
@@ -18,7 +19,7 @@ def get_data(filename):
     return seconds, l1d_miss, l1i_miss
 
 
-def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_lat):
+def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_lat, pq):
     data['time'].append(time)
     data['reads'].append(reads)
     data['writes'].append(writes)
@@ -28,6 +29,7 @@ def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_l
     data['cpu'].append(cpu)
     data['fu'].append(fu)
     data['op_lat'].append(op_lat)
+    data['pq'].append(pq)
 
 
 # function to compile the data from part folders into a dictionary and return a dataframe
@@ -46,7 +48,8 @@ def make_df():
     		'part': [],
     		'cpu': [],
     		'fu': [],
-    		'op_lat': []
+    		'op_lat': [],
+        'pq': []
     	   }
 	
     # iterate through each pq
@@ -57,9 +60,7 @@ def make_df():
             if p in ['p1', 'p2']:
                 filename = 'output/' + p + '/' + pq + '_stats.txt'
                 print(filename)
-    				# time = get_seconds(filename)
-                # reads, writes = get_instructions(filename)
-                # l1_miss = get_l1_misses(filename)
+    				# seconds, l1d_miss, l1i_miss = get_data(filename)
     				# fill_data(data, time, reads, writes, l1d_miss, l1i_miss, p, 'TimingSimpleCPU', 'none', 'none')
             elif p == 'p3':
                 for fu in fus:
@@ -77,13 +78,27 @@ def make_df():
                     print(filename)
 
             
-
-# make pandas dataframe
-# 	df = pd.DataFrame.from_dict(data)
-# 	df.cpu = df.fus.map({'6_1':'6 IssueLat, 1 OpLat'})
+    
+    # make fake data
+    for key in data:
+        if key == 'fu':
+            data[key] = [random.choice(fus) for i in range(100)]
+        elif key == 'op_lat':
+            data[key] = [random.choice(op_lats) for i in range(100)]
+        elif key == 'part':
+            data[key] = [random.choice(parts) for i in range(100)]
+        elif key == 'pq':
+            data[key] = [random.choice(['null', 'linklist', 'minheap']) for i in range(100)]
+        else: 
+            data[key] = [random.randint(0,100) for i in range(100)]
+    
+    
+    # make pandas dataframe
+    df = pd.DataFrame.from_dict(data)
+    # df.cpu = df.fus.map({'6_1':'6 IssueLat, 1 OpLat'})
 
 		
-    # return df
+    return df
 
 if __name__ == '__main__':
     make_df()
