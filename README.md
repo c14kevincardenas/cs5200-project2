@@ -27,148 +27,107 @@ Here is my proposed file structure. This file structure will be found under the 
 ```
 output
 |   |p1
-|   |   |null_stats.txt
-|   |   |null_config.ini
 |   |   |linklist_stats.txt
 |   |   |linklist_config.ini
 |   |   |minheap_stats.txt
 |   |   |minheap_config.ini
 |   |p2
-|   |   |null_stats.txt
-|   |   |null_config.ini
 |   |   |linklist_stats.txt
 |   |   |linklist_config.ini
 |   |   |minheap_stats.txt
 |   |   |minheap_config.ini
 |   |p3
 |   |   |6_1
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |5_2
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |4_3
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |3_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |2_5
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |1_6
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |p4
 |   |   |2_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |1_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |2_2
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |p5
 |   |   |unroll
-|   |   |	|null.S
 |   |   |	|linklist.S
 |   |   |	|minheap.S
 |   |   |6_1
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |5_2
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |4_3
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |3_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |2_5
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |1_6
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |2_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |1_4
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
 |   |   |	|minheap_config.ini
 |   |   |2_2
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
 |   |   |	|linklist_stats.txt
 |   |   |	|linklist_config.ini
 |   |   |	|minheap_stats.txt
