@@ -3,7 +3,7 @@
 #include <time.h>
 
 #include "pq.h"
-#include "m5ops.h"
+// #include "m5ops.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,14 +21,14 @@ int main(int argc, char *argv[])
     p[i] = &v[i];
   }
 
-  m5_dump_reset_stats()
+  // m5_dump_reset_stats()
 
   /* begin sort */
   for (i = 0; i < n; i++) pq_push(mypq, v[i], (void*)p[i]);
   for (i = 0; i < n; i++) p[i] = pq_pop(mypq);
   /* end sort */
 
-  m5_dump_reset_stats()
+  // m5_dump_reset_stats()
 
   for (i = 0; i < n; i++) {
     if (p[i]) printf("%g\n", *p[i]);
