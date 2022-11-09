@@ -12,6 +12,14 @@ In this way the program knows what implementation of `pq` to use. That can be ch
 
 It's also necessary to compile inside the Linux machine we have `gem5` installed, for future references to its code and also to make sure it works on the machine.
 
+### Makefile
+
+There is now a `Makefile` that defines some commands to compile the program with different headers and pq-* files. Just run: `make` to see the list of available commands. An example of command is below:
+
+```sh
+make build-null
+```
+This compiles `main.c` using `pq-null.c` and creates `main-null` executable.
 
 ## How to structure the output data
 Here is my proposed file structure. This file structure will be found under the gem5 folder in the virtual machine. 
