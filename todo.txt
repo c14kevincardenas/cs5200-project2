@@ -49,6 +49,9 @@ PART 3
 		(7 Combos: opLat-issueLat parameters: default-default, 6-1, 5-2, 4-3, 3-4, 2-5, 1-6)
 	Run bash script to simulate in gem5		(Smita)
 	Display L1$ miss rates results			(Kevin)
+	Are L1 $ miss rates surprising?			(Kevin)
+	Which pq-* implementation is best?		(Kevin)
+		(simTime)
 	Which FloatSimd FU prefer?				(Kevin)
 
 -----------------------------------------------------------
