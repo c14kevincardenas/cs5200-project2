@@ -1,5 +1,4 @@
 #include "pq.h"
-
 #include <stdlib.h>
 
 struct pq {
