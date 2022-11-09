@@ -33,13 +33,6 @@ output
 |   |   |minheap_stats.txt
 |   |   |minheap_config.ini
 |   |p3
-|   |   |base
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
-|   |   |	|linklist_stats.txt
-|   |   |	|linklist_config.ini
-|   |   |	|minheap_stats.txt
-|   |   |	|minheap_config.ini
 |   |   |6_1
 |   |   |	|null_stats.txt
 |   |   |	|null_config.ini
@@ -109,13 +102,6 @@ output
 |   |   |	|null.S
 |   |   |	|linklist.S
 |   |   |	|minheap.S
-|   |   |base
-|   |   |	|null_stats.txt
-|   |   |	|null_config.ini
-|   |   |	|linklist_stats.txt
-|   |   |	|linklist_config.ini
-|   |   |	|minheap_stats.txt
-|   |   |	|minheap_config.ini
 |   |   |6_1
 |   |   |	|null_stats.txt
 |   |   |	|null_config.ini
