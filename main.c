@@ -22,10 +22,12 @@ int main(int argc, char *argv[])
   }
 
   // m5_dump_reset_stats()
+
   /* begin sort */
   for (i = 0; i < n; i++) pq_push(mypq, v[i], (void*)p[i]);
   for (i = 0; i < n; i++) p[i] = pq_pop(mypq);
   /* end sort */
+
   // m5_dump_reset_stats()
 
   for (i = 0; i < n; i++) {
