@@ -1,15 +1,11 @@
 Project 2 Work Outline
 1. Create a pq-linklist.c and pq-minheap.c files
-	- source code from write up doesnt work...
-	- get it to compile/work
-	- change n to 10,000
 
 2. Base Simulation of Compiled Code
 	- Once code is compiled, simulate using gem5/stable using TimingSimple CPU
-		- Compile with -O2
 		- Find break up of instructions for different op classes
 			- I am not finding "op_class" in the file stats.txt
-		- Run for both pq-*.c files
+		- Run for all pq-*.c files
 
 3. Simulate only on Sort Portion of Code
 	- Compile with -S and -O2 to get assembly code
