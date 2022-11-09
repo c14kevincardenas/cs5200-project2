@@ -10,13 +10,18 @@ PART 1
 	Push pq-null executable to GitHub 		(Carlos)
 	Push pq-linklist executable to GitHub 	(Carlos)
 	Push pq-minheap executable to GitHub 	(Carlos)
-	 
 	Simulate pq-null exeutable in gem5		(Smita)
+	Simulate pq-linklist exeutable in gem5	(Smita)
+	Simulate pq-minheap exeutable in gem5	(Smita)
 
 -----------------------------------------------------------
 PART 2
 -----------------------------------------------------------
-
+	Uncomment 3 lines in main.c 			(Carlos)
+	(#include m5ops.h, m5_dump_reset_stats())
+	Locally compile pq-null.c 				(Carlos)
+	Locally compile pq-linklist.c 			(Carlos)
+	Locally compile pq-minheap.c 			(Carlos)
 
 
 
