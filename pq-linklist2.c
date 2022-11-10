@@ -50,7 +50,7 @@ void* pq_pop(pq *head)
 {
   pq* temp = head;
   head = head->next;
-  return temp;
+  return temp->data;
 }
 
 /* Deallocates (frees) pq. Shallow destruction,
