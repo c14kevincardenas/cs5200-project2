@@ -1,0 +1,27 @@
+#sieve_1K: sieve.c dockcross
+#	sudo	./dockcross bash -c '$$CC sieve.c -o sieve_1K -static -lm'
+
+GEM5=/home/smita/gem5
+LIBM5=/util/m5/build/x86/out/libm5.a
+CFLAGS=-static -I$(GEM5)
+
+build-linklist-p1-m5-dockcross: main_p1.c pq-linklist.c libm5.a dockcross
+	sudo	./dockcross bash -c '$$CC main_p1.c pq-linklist.c libm5.a -o main-linklist-p1 -static -I$(GEM5)'
+	@echo "Program 'main-linklist-p1' compiled.\n"
+
+#build-linklist-p1-m5-dockcross: main_p1.c pq-linklist.c $(GEM5)/util/m5/build/x86/out/libm5.a dockcross
+#	sudo	./dockcross bash -c '$$CC main_p1.c pq-linklist.c $(GEM5)/util/m5/build/x86/out/libm5.a -o main-linklist-p1 -static -I$(GEM5)'
+#	@echo "Program 'main-linklist-p1' compiled.\n"
+
+build-linklist-p1-dockcross: main_p1.c pq-linklist.c dockcross
+	sudo	./dockcross bash -c '$$CC main_p1.c pq-linklist.c -o main-linklist-p1 -static'
+	@echo "Program 'main-linklist-p1' compiled.\n"
+
+build-null-dockcross: main.c pq-null.c dockcross
+	sudo	./dockcross bash -c '$$CC main.c pq-null.c -o main-null -static'
+	@echo "Program 'main-null' compiled.\n"
+
+dockcross:
+	sudo docker run --rm dockcross/linux-x86:latest > ./dockcross
+	chmod +x ./dockcross
+
