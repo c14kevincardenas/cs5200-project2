@@ -1,11 +1,13 @@
 #include "pq.h"
 #include <stdlib.h>
 
-// A linked list node
-struct pq {
-    void* data;
-    pq* next;
-};
+// Node
+typedef struct pq {
+	void* data;
+	// Lower values indicate higher priority
+	double priority;
+	struct pq* next;
+} pq;
 
 /* Allocates and initializes a new pq */
 pq* pq_create()
@@ -13,36 +15,43 @@ pq* pq_create()
     return (pq*)malloc(sizeof(pq));
 }
 
-// Push value to pq to the end of the linked list
-void pq_push(pq* head, double key, void *value)
+// Push according to priority
+void pq_push(pq** head, double key, void* value)
 {
-    pq* newNode = pq_create();
-    newNode->data = value;
-    newNode->next = NULL;
-
-    pq* start = head;
-
-    while(start->next != NULL){
-        start = start->next;
+    pq* start = (*head);
+	
+	// create a new node
+	pq* temp = (pq*)malloc(sizeof(pq));
+    temp->data = value;
+    temp->priority = key;
+    temp->next = NULL;
+	
+	// check if new node should be head
+	if ((*head)->priority > key) {
+ 
+        // Insert New Node before head
+        temp->next = *head;
+        (*head) = temp;
     }
+	else {
 
-    start->next = newNode;
+		while(start->next != NULL && start->next->priority < key){
+			start = start->next;
+		}
+
+		temp->next = start->next;
+		start->next = temp;
+	}
 }
 
-// Removes element from pq, from the end of the linked list
-// and return its data
-void* pq_pop(pq* head)
+// Removes the element with the
+// highest priority from the list
+// and return it
+void* pq_pop(pq** head)
 {
-    pq* temp = head;
-    
-    while(temp->next->next != NULL) {
-        temp = temp->next;
-    }
-
-    pq* p = temp->next;
-    temp->next = NULL;
-    
-    return p->data;
+    pq* temp = *head;
+    (*head) = (*head)->next;
+    return temp->data;
 }
 
 /* Deallocates (frees) pq. Shallow destruction,

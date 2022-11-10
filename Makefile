@@ -1,9 +1,7 @@
 help:
 	@echo "Available commands:"
-	@echo "- build-null-p1"
 	@echo "- build-linklist-p1"
 	@echo "- build-minheap-p1"
-	@echo "- build-null"
 	@echo "- build-linklist"
 	@echo "- build-minheap"
 
