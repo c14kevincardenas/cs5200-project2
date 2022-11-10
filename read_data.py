@@ -4,41 +4,40 @@ import random
 
 def get_data(filename):
     with open(filename) as f:
-            lines = f.readlines()
-            first_line = True
-            for i, line in enumerate(lines):
-                if first_line:
-                    first_line = False
-                elif line.split() != []:
-                    if line.split()[0] == 'simSeconds':
-                        seconds = float(line.split()[1])
-                    elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
-                        l1d_miss =  float(line.split()[1])
-                    elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
-                        l1i_miss =  float(line.split()[1])
-    return seconds, l1d_miss, l1i_miss
+        lines = f.readlines()
+        first_line = True
+        for i, line in enumerate(lines):
+            if first_line:
+                first_line = False
+            elif line.split() != []:
+                if line.split()[0] == 'simSeconds':
+                    seconds = float(line.split()[1])
+                elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
+                    l1d_miss =  float(line.split()[1])
+                elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
+                    l1i_miss =  float(line.split()[1])
+    return seconds, l1d_miss, l1i_miss, l2_miss
 
 
-def get_inst_mix(filename):
-    i = 0
-    start = 47
-    end = 100
+def get_inst_mix(filename, p):
     inst_mix = {}
     
     with open(filename) as f:
         lines = f.readlines()
-        first_line = True
-        for i, line in enumerate(lines):
-            if start <= i <= end:
-                # print(line)
-                contents = line.split()
-                num_ops = int(contents[1])
-                if num_ops > 0:
-                    op_type = contents[0].split('.')[-1].split('::')[-1]
-                    if op_type != 'total':
-                        inst_mix[op_type] = (num_ops, float(contents[2][:-1]))
-                    else:
-                        inst_mix[op_type] = (num_ops, 1.0)
+        for line in lines:
+            contents = line.split()
+            # check if line has data
+            if (len(contents) > 0) and (contents[0] != '----------'):
+                # check if line is class of exec inst
+                if contents[0].split('.')[-1].split('::')[0] == 'statExecutedInstType':
+                    num_ops = int(contents[1])
+                    if num_ops > 0:
+                        op_type = contents[0].split('.')[-1].split('::')[-1]
+                        if op_type != 'total':
+                            if op_type not in inst_mix:
+                                inst_mix[op_type] = [num_ops]
+                            else:
+                                inst_mix[op_type].append(num_ops)
     
     return inst_mix
 
@@ -57,12 +56,13 @@ def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_l
 
 # function to compile the data from part folders into a dictionary and return a dataframe
 def make_df():
+    # init parts of file structure
     pqs = ['linklist', 'minheap']
     parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     fus = ['6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
     
-    
+    # data dictionary for p3-p5
     data = {'time': [],
     		'reads': [],
     		'writes': [],
@@ -75,6 +75,9 @@ def make_df():
         'pq': []
     	   }
 	
+    # init inst_mix list of dictionaries
+    inst_mix = []
+    
     # iterate through each pq
     for pq in pqs:
         # iterate through each part folder
@@ -83,8 +86,7 @@ def make_df():
             if p in ['p1', 'p2']:
                 filename = 'output/' + p + '/' + pq + '_stats.txt'
                 print(filename)
-    				# seconds, l1d_miss, l1i_miss = get_data(filename)
-    				# fill_data(data, time, reads, writes, l1d_miss, l1i_miss, p, 'TimingSimpleCPU', 'none', 'none')
+                inst_mix.append(get_inst_mix('m5out/p1/linklist_stats.txt', p))
             elif p == 'p3':
                 for fu in fus:
                     filename = 'output/' + p + '/' + fu + '/' + pq + '_stats.txt'
@@ -125,4 +127,4 @@ def make_df():
 
 if __name__ == '__main__':
     make_df()
-    inst_mix = get_inst_mix('m5out/p1/linklist_stats.txt')
+    inst_mix = get_inst_mix('m5out/p1/linklist_stats.txt', 'p1')

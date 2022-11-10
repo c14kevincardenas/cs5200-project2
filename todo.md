@@ -34,14 +34,15 @@
 
 ## PART 3
 
-- [ ] Write bash script to run all 7 combos		(Carlos/Kevin)
-		(CPU: BaseMinorCPU, Cache: 32 KB DM L1 i$ 64 KB DM L1 d$ 4 MB 8-way L2 unified $)
-		(7 Combos: opLat-issueLat parameters: default-default, 6-1, 5-2, 4-3, 3-4, 2-5, 1-6)
+- [ ] Write bash script to run all 9 combos		(Carlos/Kevin)
+		(CPU: X86MinorCPU, Cache: 32 KB DM L1 i$ 64 KB DM L1 d$ 4 MB 8-way L2 unified $)
+		(7 Combos: opLat-issueLat parameters: default-default (n=1000), default-default (n=10), default-default (n=10000), 6-1, 5-2, 4-3, 3-4, 2-5, 1-6)
 - [ ] Run bash script to simulate in gem5		(Smita)
-- [ ] Display L1$ miss rates results			(Kevin)
+- [ ] Display L1$ miss rates results (n=1000)	(Kevin)
 - [ ] Are L1 $ miss rates surprising?			(Kevin)
 - [ ] Which pq- implementation is best?			(Kevin)
 		(simTime)
+- [ ] Repeat for n=10 and n=10000
 - [ ] Which FloatSimd FU prefer?				(Kevin)
 
 ## PART 4
