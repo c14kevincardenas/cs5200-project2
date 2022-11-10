@@ -3,13 +3,13 @@
 ## PART 1
 
 - [x] Create Makefile to compile 				(Carlos)
-- [ ] Locally compile pq-linklist.c 			(Carlos)
-- [ ] Locally compile pq-minheap.c 				(Carlos)
-- [ ] Push main-linklist-p1 to GitHub 			(Carlos)
-- [ ] Push main-minheap-p1 to GitHub 			(Carlos)
+- [x] Locally compile pq-linklist.c 			(Carlos)
+- [x] Locally compile pq-minheap.c 				(Carlos)
+- [x] Push main-linklist-p1 to GitHub 			(Carlos)
+- [x] Push main-minheap-p1 to GitHub 			(Carlos)
 - [ ] Simulate pq-linklist-p1 exeutable in gem5 (Smita)
 - [ ] Simulate pq-minheap-p1 exeutable in gem5 	(Smita)
-- [ ] Make script to pull correct inst mix 		(Kevin)
+- [x] Make script to pull correct inst mix 		(Kevin)
 - [ ] Display inst mix results 					(Kevin)
 
 ## PART 2

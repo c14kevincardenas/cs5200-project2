@@ -19,6 +19,29 @@ def get_data(filename):
     return seconds, l1d_miss, l1i_miss
 
 
+def get_inst_mix(filename):
+    i = 0
+    start = 47
+    end = 100
+    inst_mix = {}
+    
+    with open(filename) as f:
+        lines = f.readlines()
+        first_line = True
+        for i, line in enumerate(lines):
+            if start <= i <= end:
+                # print(line)
+                contents = line.split()
+                num_ops = int(contents[1])
+                if num_ops > 0:
+                    op_type = contents[0].split('.')[-1].split('::')[-1]
+                    if op_type != 'total':
+                        inst_mix[op_type] = (num_ops, float(contents[2][:-1]))
+                    else:
+                        inst_mix[op_type] = (num_ops, 1.0)
+    
+    return inst_mix
+
 def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_lat, pq):
     data['time'].append(time)
     data['reads'].append(reads)
@@ -34,9 +57,9 @@ def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_l
 
 # function to compile the data from part folders into a dictionary and return a dataframe
 def make_df():
-    pqs = ['null', 'linklist', 'minheap']
+    pqs = ['linklist', 'minheap']
     parts = ['p1', 'p2', 'p3', 'p4', 'p5']
-    fus = ['base', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
+    fus = ['6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
     
     
@@ -88,7 +111,7 @@ def make_df():
         elif key == 'part':
             data[key] = [random.choice(parts) for i in range(100)]
         elif key == 'pq':
-            data[key] = [random.choice(['null', 'linklist', 'minheap']) for i in range(100)]
+            data[key] = [random.choice(['linklist', 'minheap']) for i in range(100)]
         else: 
             data[key] = [random.randint(0,100) for i in range(100)]
     
@@ -102,4 +125,4 @@ def make_df():
 
 if __name__ == '__main__':
     make_df()
-    print(get_data('example_stats.txt'))
+    inst_mix = get_inst_mix('m5out/p1/linklist_stats.txt')
