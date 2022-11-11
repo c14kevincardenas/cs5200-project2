@@ -14,9 +14,9 @@
 
 ## PART 2
 
-- [ ] Uncomment 3 lines in main.c 				(Carlos)
+- [x] Uncomment 3 lines in main.c 				(Carlos)
 		(#include m5ops.h, m5_dump_reset_stats())
-- [ ] Modify Makefile to inclue -S 				(Carlos)
+- [x] Modify Makefile to include -S 				(Carlos)
 - [ ] Locally compile pq-linklist.c 			(Carlos)
 - [ ] Locally compile pq-minheap.c 				(Carlos)
 - [ ] Push pq-linklist executable to GitHub 	(Carlos)
