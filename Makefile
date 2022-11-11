@@ -14,11 +14,11 @@ build-minheap-p1:
 	@echo "Program 'main-minheap-p1' compiled.\n"
 
 build-linklist-p2:
-	gcc -O2 -static -I/gem5 main.c pq-linklist.c /gem5/util/m5/build/x86/out/libm5.a -o main-linklist-p2
+	gcc -O2 -static -I/gem5/include main.c pq-linklist.c /gem5/util/m5/build/x86/out/libm5.a -o main-linklist-p2
 	@echo "Program 'main-linklist-p2' compiled.\n"
 
 build-minheap-p2:
-	gcc -O2 -static -I/gem5 main.c pq-minheap.c /gem5/util/m5/build/x86/out/libm5.a -o main-minheap-p2
+	gcc -O2 -static -I/gem5/include main.c pq-minheap.c /gem5/util/m5/build/x86/out/libm5.a -o main-minheap-p2
 	@echo "Program 'main-minheap-p2' compiled.\n"
 
 	
