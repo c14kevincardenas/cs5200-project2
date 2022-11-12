@@ -59,7 +59,7 @@ def make_df():
     # init parts of file structure
     pqs = ['linklist', 'minheap']
     parts = ['p1', 'p2', 'p3', 'p4', 'p5']
-    fus = ['6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
+    fus = ['base', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
     
     # data dictionary for p3-p5
@@ -83,23 +83,33 @@ def make_df():
         # iterate through each part folder
         for p in parts:
             # construct the filename, get the time, fill the dictionary 'data'
-            if p in ['p1', 'p2']:
-                filename = 'output/' + p + '/' + pq + '_stats.txt'
+            if p == 'p1':
+                filename = 'output/' + p + '/' + pq + '-stats.txt'
                 print(filename)
-                inst_mix.append(get_inst_mix('m5out/p1/linklist_stats.txt', p))
+                # inst_mix.append(get_inst_mix('m5out/p1/linklist-stats.txt', p))
+            elif p == 'p2':
+                for n in [1000, 10000]:
+                    filename = 'output/' + p + '/' + pq + '-n' + str(n) + '-stats.txt'
+                    print(filename)
+                    # inst_mix.append(get_inst_mix('m5out/p2/linklist-n1000-stats.txt', p))
             elif p == 'p3':
                 for fu in fus:
-                    filename = 'output/' + p + '/' + fu + '/' + pq + '_stats.txt'
-                    print(filename)
+                    if fu == 'base':
+                        for n in [10, 1000, 10000]:
+                           filename = 'output/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
+                           print(filename)
+                    else:
+                        filename = 'output/' + p + '/' + fu + '/' + pq + '-stats.txt'
+                        print(filename)
             
             elif p == 'p4':
                 for op_lat in op_lats:
-                    filename = 'output/' + p + '/' + op_lat + '/' + pq + '_stats.txt'
+                    filename = 'output/' + p + '/' + op_lat + '/' + pq + '-stats.txt'
                     print(filename)
             
             else:
                 for combo in fus + op_lats:
-                    filename = 'output/' + p + '/' + combo + '/' + pq + '_stats.txt'
+                    filename = 'output/' + p + '/' + combo + '/' + pq + '-stats.txt'
                     print(filename)
 
             
@@ -127,4 +137,4 @@ def make_df():
 
 if __name__ == '__main__':
     make_df()
-    inst_mix = get_inst_mix('m5out/p1/linklist_stats.txt', 'p1')
+    # inst_mix = get_inst_mix('m5out/p1/linklist-stats.txt', 'p1')
