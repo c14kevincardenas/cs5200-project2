@@ -34,11 +34,11 @@
 		(CPU: X86MinorCPU, Cache: 32 KB DM L1 i$ 64 KB DM L1 d$ 4 MB 8-way L2 unified $)
 		(7 Combos: opLat-issueLat parameters: default-default (n=1000), default-default (n=10), default-default (n=10000), 6-1, 5-2, 4-3, 3-4, 2-5, 1-6)
 - [x] Run bash script to simulate in gem5		(Smita)
-- [ ] Display L1$ miss rates results (n=1000)	(Kevin)
+- [x] Display L1$ miss rates results (n=1000)	(Kevin)
 - [ ] Are L1 $ miss rates surprising?			(Kevin)
 - [ ] Which pq- implementation is best?			(Kevin)
 		(simTime)
-- [ ] Repeat for n=10 and n=10000
+- [x] Repeat for n=10 and n=10000
 - [ ] Which FloatSimd FU prefer?				(Kevin)
 
 ## PART 4

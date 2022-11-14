@@ -19,13 +19,15 @@ def get_data(filename):
                 # check if collecting
                 if collect:
                     if line.split()[0] == 'simSeconds':
-                        seconds = float(line.split()[1])
-                        print(seconds)
-                # elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
-                #     l1d_miss =  float(line.split()[1])
-                # elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
-                #     l1i_miss =  float(line.split()[1])
-    # return seconds, l1d_miss, l1i_miss, l2_miss
+                        time = float(line.split()[1])
+                    elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
+                        l1d_miss =  float(line.split()[1])
+                    elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
+                        l1i_miss =  float(line.split()[1])
+                    elif line.split()[0] == 'system.l2.overallMissRate::total':
+                        l2_miss =  float(line.split()[1])
+    
+    return time, l1d_miss, l1i_miss, l2_miss
 
 
 def get_inst_mix(filename, p, pq, n):
@@ -84,40 +86,38 @@ def make_inst_mix_df(inst_mix):
     return df1, df2
 
 
-def fill_data(data, time, reads, writes, l1d_miss, l1i_miss, part, cpu, fu, op_lat, pq):
+def fill_data(data, time, l1d_miss, l1i_miss, l2_miss, part, fu, op_lat, pq, n):
     data['time'].append(time)
-    data['reads'].append(reads)
-    data['writes'].append(writes)
     data['l1d_miss'].append(l1d_miss)
     data['l1i_miss'].append(l1i_miss)
+    data['l2_miss'].append(l2_miss)
     data['part'].append(part)
-    data['cpu'].append(cpu)
     data['fu'].append(fu)
     data['op_lat'].append(op_lat)
     data['pq'].append(pq)
+    data['n'].append(n)
 
 
 # function to compile the data from part folders into a dictionary and return a dataframe
 def read_data():
     # init parts of file structure
     pqs = ['linklist', 'minheap']
-    parts = ['p1', 'p2']
+    parts = ['p1', 'p2', 'p3']
     # parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     fus = ['default', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
     
     # data dictionary for p3-p5
     data = {'time': [],
-    		'reads': [],
-    		'writes': [],
-        'l1d_miss': [],
-    		'l1i_miss': [],
-    		'part': [],
-    		'cpu': [],
-    		'fu': [],
-    		'op_lat': [],
-        'pq': []
-    	   }
+            'l1d_miss': [],
+            	'l1i_miss': [],
+            'l2_miss': [],
+            'part': [],
+            'fu': [],
+            'op_lat': [],
+            'pq': [],
+            'n': []
+            }
 	
     # init inst_mix list of dictionaries
     inst_mix = []
@@ -136,13 +136,13 @@ def read_data():
                     inst_mix.append(get_inst_mix(filename, p, pq, n))
             elif p == 'p3':
                 for fu in fus:
-                    if fu == 'base':
+                    if fu == 'default':
                         for n in [10, 1000, 10000]:
                            filename = 'm5out/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
-                           print(filename)
+                           time, l1d_miss, l1i_miss, l2_miss = get_data(filename)
+                           fill_data(data, time, l1d_miss, l1i_miss, l2_miss, p, fu, 0, pq, n)
                     else:
                         filename = 'm5out/' + p + '/' + fu + '/' + pq + '-stats.txt'
-                        print(filename)
             
             elif p == 'p4':
                 for op_lat in op_lats:
@@ -161,13 +161,13 @@ def read_data():
     df2 = df2.melt(id_vars=['pq', 'n', 'part'], var_name='op_class')
     
     # make pandas dataframe
-    # df = pd.DataFrame.from_dict(data)
+    df3 = pd.DataFrame.from_dict(data)
     # df.cpu = df.fus.map({'6_1':'6 IssueLat, 1 OpLat'})
 
 		
-    return df1, df2
+    return df1, df2, df3
 
 if __name__ == '__main__':
-    # df1, df2 = read_data()
+    df1, df2, df3 = read_data()
     # inst_mix = get_inst_mix('m5out/p1/linklist-stats.txt', 'p1')
-    get_data('m5out/p3/default/linklist-n10-stats.txt')
+    time, l1d_miss, l1i_miss, l2_miss = get_data('m5out/p3/default/linklist-n10-stats.txt')
