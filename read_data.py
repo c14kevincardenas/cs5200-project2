@@ -26,8 +26,10 @@ def get_data(filename):
                         l1i_miss =  float(line.split()[1])
                     elif line.split()[0] == 'system.l2.overallMissRate::total':
                         l2_miss =  float(line.split()[1])
+                    elif line.split()[0] == 'system.cpu.cpi':
+                        cpi =  float(line.split()[1])
     
-    return time, l1d_miss, l1i_miss, l2_miss
+    return time, l1d_miss, l1i_miss, l2_miss, cpi
 
 
 def get_inst_mix(filename, p, pq, n):
@@ -86,11 +88,12 @@ def make_inst_mix_df(inst_mix):
     return df1, df2
 
 
-def fill_data(data, time, l1d_miss, l1i_miss, l2_miss, part, fu, op_lat, pq, n):
+def fill_data(data, time, l1d_miss, l1i_miss, l2_miss, cpi, part, fu, op_lat, pq, n):
     data['time'].append(time)
     data['l1d_miss'].append(l1d_miss)
     data['l1i_miss'].append(l1i_miss)
     data['l2_miss'].append(l2_miss)
+    data['cpi'].append(cpi)
     data['part'].append(part)
     data['fu'].append(fu)
     data['op_lat'].append(op_lat)
@@ -112,6 +115,7 @@ def read_data():
             'l1d_miss': [],
             	'l1i_miss': [],
             'l2_miss': [],
+            'cpi': [],
             'part': [],
             'fu': [],
             'op_lat': [],
@@ -136,13 +140,11 @@ def read_data():
                     inst_mix.append(get_inst_mix(filename, p, pq, n))
             elif p == 'p3':
                 for fu in fus:
-                    if fu == 'default':
-                        for n in [10, 1000, 10000]:
-                           filename = 'm5out/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
-                           time, l1d_miss, l1i_miss, l2_miss = get_data(filename)
-                           fill_data(data, time, l1d_miss, l1i_miss, l2_miss, p, fu, 0, pq, n)
-                    else:
-                        filename = 'm5out/' + p + '/' + fu + '/' + pq + '-stats.txt'
+                    for n in [10, 1000, 10000]:
+                       filename = 'm5out/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
+                       print(filename)
+                       time, l1d_miss, l1i_miss, l2_miss, cpi = get_data(filename)
+                       fill_data(data, time, l1d_miss, l1i_miss, l2_miss, cpi, p, fu, 0, pq, n)
             
             elif p == 'p4':
                 for op_lat in op_lats:
@@ -170,4 +172,4 @@ def read_data():
 if __name__ == '__main__':
     df1, df2, df3 = read_data()
     # inst_mix = get_inst_mix('m5out/p1/linklist-stats.txt', 'p1')
-    time, l1d_miss, l1i_miss, l2_miss = get_data('m5out/p3/default/linklist-n10-stats.txt')
+    # time, l1d_miss, l1i_miss, l2_miss = get_data('m5out/p3/default/linklist-n10-stats.txt')
