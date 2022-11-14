@@ -44,7 +44,7 @@
 ## PART 4
 
 - [x] Add int & FP opLat arg parsing in se.py	(Smita)
-- [ ] Add IntFU defs in cpu.py MinorCPU class 	(Carlos/Kevin)
+- [x] Add IntFU defs in cpu.py MinorCPU class 	(Smita)
 - [x] Write bash script to run 3 combos			(Smita)
 		(3 Combos: opLat cycles (int-FP) parameters: 2-4, 1-4, 2-2)
 		(issueLat = 1)
