@@ -10,7 +10,7 @@
 - [x] Simulate pq-linklist-p1 executable in gem5 (Smita)
 - [x] Simulate pq-minheap-p1 executable in gem5 	(Smita)
 - [x] Make script to pull correct inst mix 		(Kevin)
-- [ ] Display inst mix results 					(Kevin)
+- [x] Display inst mix results 					(Kevin)
 
 ## PART 2
 
@@ -25,8 +25,8 @@
 		(gcc -static -I${GEM5} -o main main.c pq-minheap.c {GEM5}/util/m5/build/X86/out/libm5.a)
 - [x] Simulate pq-linklist exeutable in gem5	(Smita)
 - [x] Simulate pq-minheap exeutable in gem5		(Smita)
-- [ ] Modify script to pull correct inst mix	(Kevin)
-- [ ] Display inst mix results					(Kevin)
+- [x] Modify script to pull correct inst mix	(Kevin)
+- [x] Display inst mix results					(Kevin)
 
 ## PART 3
 

@@ -4,19 +4,28 @@ import random
 
 def get_data(filename):
     with open(filename) as f:
+        # flag for middle section of sim stats
+        collect = False
+        
+        # iterate through lines in file
         lines = f.readlines()
-        first_line = True
-        for i, line in enumerate(lines):
-            if first_line:
-                first_line = False
-            elif line.split() != []:
-                if line.split()[0] == 'simSeconds':
-                    seconds = float(line.split()[1])
-                elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
-                    l1d_miss =  float(line.split()[1])
-                elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
-                    l1i_miss =  float(line.split()[1])
-    return seconds, l1d_miss, l1i_miss, l2_miss
+        for line in lines:
+            contents = line.split()
+            # check for blank line
+            if len(contents) > 0:
+                if contents[1] == 'End':
+                    collect = not collect
+            
+                # check if collecting
+                if collect:
+                    if line.split()[0] == 'simSeconds':
+                        seconds = float(line.split()[1])
+                        print(seconds)
+                # elif line.split()[0] == 'system.cpu.dcache.overallMissRate::total':
+                #     l1d_miss =  float(line.split()[1])
+                # elif line.split()[0] == 'system.cpu.icache.overallMissRate::total':
+                #     l1i_miss =  float(line.split()[1])
+    # return seconds, l1d_miss, l1i_miss, l2_miss
 
 
 def get_inst_mix(filename, p, pq, n):
@@ -159,5 +168,6 @@ def read_data():
     return df1, df2
 
 if __name__ == '__main__':
-    df1, df2 = read_data()
+    # df1, df2 = read_data()
     # inst_mix = get_inst_mix('m5out/p1/linklist-stats.txt', 'p1')
+    get_data('m5out/p3/default/linklist-n10-stats.txt')
