@@ -114,7 +114,7 @@ def fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency,
 def read_data():
     # init parts of file structure
     pqs = ['linklist', 'minheap']
-    parts = ['p1', 'p2', 'p3']
+    parts = ['p1', 'p2', 'p3', 'p4']
     # parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     fus = ['default', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
@@ -154,14 +154,13 @@ def read_data():
                 for fu in fus:
                     for n in [10, 1000, 10000]:
                        filename = 'm5out/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
-                       print(filename)
                        time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
-                       fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, fu, 0, pq, n)
-            
+                       fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, fu, 'default', pq, n)
             elif p == 'p4':
                 for op_lat in op_lats:
-                    filename = 'm5out/' + p + '/' + op_lat + '/' + pq + '-stats.txt'
-                    print(filename)
+                    filename = 'm5out/' + p + '/'  + op_lat + '/' + pq + '-n10000' + '-stats.txt'
+                    time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
+                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, n)
             
             else:
                 for combo in fus + op_lats:
@@ -175,13 +174,13 @@ def read_data():
     df2 = df2.melt(id_vars=['pq', 'n', 'part'], var_name='op_class')
     
     # make pandas dataframe
-    df3 = pd.DataFrame.from_dict(data)
+    df = pd.DataFrame.from_dict(data)
     # df.cpu = df.fus.map({'6_1':'6 IssueLat, 1 OpLat'})
 
 		
-    return df1, df2, df3
+    return df1, df2, df
 
 if __name__ == '__main__':
-    df1, df2, df3 = read_data()
+    df1, df2, df = read_data()
     # inst_mix = get_inst_mix('m5out/p1/linklist-stats.txt', 'p1')
     # time, l1d_miss, l1i_miss, l2_miss = get_data('m5out/p3/default/linklist-n10-stats.txt')
