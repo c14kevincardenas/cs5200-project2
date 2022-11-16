@@ -53,15 +53,16 @@
 
 ## PART 5
 
-- [ ] Modify Makefile, include -funroll-loops	(Carlos)
-- [ ] Locally compile pq-linklist.c 			(Carlos)
-- [ ] Locally compile pq-minheap.c 				(Carlos)
+- [x] Modify Makefile, include -funroll-loops	(Smita)
+- [x] Locally compile pq-linklist.c 			(Smita)
+- [x] Locally compile pq-minheap.c 				(Smita)
+- [x] Write bash script to run 9+3 combos			(Smita)
 - [ ] Push pq-linklist assembly to GitHub 		(Carlos)
 - [ ] Push pq-minheap assembly to GitHub 		(Carlos)
 - [ ] Examine assembly to ID # unrolls			(Kevin)
 		(main.c and 3x pq-*.c)
-- [ ] Repeat Part 3 with new executables		(Smita)
-- [ ] Repeat Part 4 with new executables		(Smita)
+- [x] Repeat Part 3 with new executables		(Smita)
+- [x] Repeat Part 4 with new executables		(Smita)
 - [ ] Repeat Part 3 questions w/ new stats.txt	(Kevin)
 - [ ] Repeat Part 4 questions w/ new stats.txt	(Kevin)
 - [ ] Is loop unrolling good/bad/neutral?		(Kevin)
