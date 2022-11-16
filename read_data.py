@@ -171,7 +171,7 @@ def read_data():
                 for op_lat in op_lats:
                     filename = 'm5out/' + p + '/'  + op_lat + '/' + pq + '-stats.txt'
                     time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
-                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, n)
+                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, 1000)
     
     
     # make dataframes for p1 and p2
