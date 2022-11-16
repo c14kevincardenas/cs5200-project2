@@ -114,7 +114,7 @@ def fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency,
 def read_data():
     # init parts of file structure
     pqs = ['linklist', 'minheap']
-    parts = ['p1', 'p2', 'p3', 'p4']
+    parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     # parts = ['p1', 'p2', 'p3', 'p4', 'p5']
     fus = ['default', '6_1', '5_2', '4_3', '3_4', '2_5', '1_6']
     op_lats = ['2_4', '1_4', '2_2']
@@ -158,14 +158,20 @@ def read_data():
                        fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, fu, 'default', pq, n)
             elif p == 'p4':
                 for op_lat in op_lats:
-                    filename = 'm5out/' + p + '/'  + op_lat + '/' + pq + '-n10000' + '-stats.txt'
+                    filename = 'm5out/' + p + '/'  + op_lat + '/' + pq + '-stats.txt'
                     time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
-                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, n)
+                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, 1000)
             
             else:
-                for combo in fus + op_lats:
-                    filename = 'm5out/' + p + '/' + combo + '/' + pq + '-stats.txt'
-                    print(filename)
+                for fu in fus[1:]:
+                    for n in [10, 1000, 10000]:
+                       filename = 'm5out/' + p + '/'  + fu + '/' + pq + '-n' + str(n) + '-stats.txt'
+                       time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
+                       fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, fu, 'default', pq, n)
+                for op_lat in op_lats:
+                    filename = 'm5out/' + p + '/'  + op_lat + '/' + pq + '-stats.txt'
+                    time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi = get_data(filename)
+                    fill_data(data, time, l1d_miss, l1i_miss, l2_miss, l1d_latency, l1i_latency, l2_latency, cpi, p, 'default', op_lat, pq, n)
     
     
     # make dataframes for p1 and p2
