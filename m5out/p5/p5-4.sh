@@ -4,12 +4,9 @@ gem5=build/X86/gem5.opt
 
 se_py=configs/example/se_p4.py
 n_opt=--options=
-#confg="--cpu-type=MinorCPU  --caches --l2d_size=64kB --l1i_size=32kB --l2cache --l2_size=8MB --l1i_assoc=1 --l1d_assoc=1 --l2_assoc=8 --fpu_operation_latency=5 --fpu_issue_latency=2 --ifu_operation_latency=2 --ifu_issue_latency=2"
 m5out_dir=m5out/
 ini_file=config.ini
 stats_file=stats.txt
-#part=p3
-#to_dir=/cs5200-project2/m5out/$part/
 
 for iteration in 1 2 3
 do 
@@ -27,13 +24,13 @@ do
 	esac
 	confg="--cpu-type=MinorCPU  --caches --l1d_size=64kB --l1i_size=32kB --l2cache --l2_size=8MB --l1i_assoc=1 --l1d_assoc=1 --l2_assoc=8 --fpu_operation_latency=$fpu_opLat --ifu_operation_latency=$ifu_opLat" 
 	sep=_
-	part=p4/$ifu_opLat$sep$fpu_opLat
+	part=p5/$ifu_opLat$sep$fpu_opLat
 	to_dir=/cs5200-project2/m5out/$part/
 
 	for bin in linklist minheap
 	do
 		num=1000
-		cmd="--cmd=/cs5200-project2/main-$bin-p2"
+		cmd="--cmd=/cs5200-project2/main-$bin-p5"
 		n=$n_opt$num
 		echo $gem5 $se_py $cmd $n $confg
 		$gem5 $se_py $cmd $n $confg
