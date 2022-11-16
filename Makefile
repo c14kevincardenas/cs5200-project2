@@ -34,9 +34,9 @@ build-minheap-p5:
 	@echo "Program 'main-minheap-p5' compiled.\n"
 
 generate-asm-linklist:
-	gcc -O2 -S -I/gem5/include main.c pq-linklist.c
+	gcc -O2 -S -funroll-loops -I/gem5/include main.c pq-linklist.c
 	@echo "Generated 'main.s' and 'pq-linklist.s' assembly files.\n"
 
 generate-asm-minheap:
-	gcc -O2 -S -I/gem5/include main.c pq-minheap.c
+	gcc -O2 -S -funroll-loops -I/gem5/include main.c pq-minheap.c
 	@echo "Generated 'main.s' and 'pq-minheap.s' assembly files.\n"
