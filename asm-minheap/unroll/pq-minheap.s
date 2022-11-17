@@ -29,54 +29,51 @@ heapify:
 .L9:
 	movq	(%rdi), %rdx
 	leal	(%rsi,%rsi), %eax
-	leal	1(%rax), %ecx
+	movl	%esi, %r11d
+	leal	1(%rax), %r9d
 	movl	(%rdx), %r8d
-	cmpl	%r8d, %ecx
-	jge	.L10
+	cmpl	%r8d, %r9d
+	jge	.L4
 	movq	8(%rdx), %r11
-	movslq	%eax, %r9
+	movslq	%eax, %rcx
 	movslq	%esi, %r10
 	salq	$4, %r10
-	salq	$4, %r9
+	salq	$4, %rcx
 	movsd	8(%r11,%r10), %xmm0
-	comisd	24(%r9,%r11), %xmm0
-	cmovbe	%esi, %ecx
+	comisd	24(%rcx,%r11), %xmm0
+	movl	%r9d, %r11d
+	cmovbe	%esi, %r11d
 .L4:
 	leal	2(%rax), %r9d
 	cmpl	%r9d, %r8d
 	jle	.L6
 	cltq
-	movq	8(%rdx), %r10
-	movslq	%ecx, %r8
+	movq	8(%rdx), %rcx
+	movslq	%r11d, %r8
 	addq	$2, %rax
 	salq	$4, %r8
 	salq	$4, %rax
-	movsd	8(%r10,%r8), %xmm0
-	ucomisd	8(%r10,%rax), %xmm0
-	cmova	%r9d, %ecx
+	movsd	8(%rcx,%r8), %xmm1
+	ucomisd	8(%rcx,%rax), %xmm1
+	cmova	%r9d, %r11d
 .L6:
-	cmpl	%esi, %ecx
+	cmpl	%esi, %r11d
 	je	.L3
 	movq	8(%rdx), %rdx
-	movslq	%ecx, %rax
+	movslq	%r11d, %rax
 	movslq	%esi, %rsi
 	salq	$4, %rax
 	salq	$4, %rsi
-	addq	%rdx, %rax
 	addq	%rdx, %rsi
-	movq	(%rsi), %rdx
-	movsd	8(%rsi), %xmm0
-	movdqu	(%rax), %xmm1
-	movups	%xmm1, (%rsi)
-	movl	%ecx, %esi
-	movq	%rdx, (%rax)
-	movsd	%xmm0, 8(%rax)
+	addq	%rdx, %rax
+	movq	(%rsi), %r10
+	movsd	8(%rsi), %xmm2
+	movdqu	(%rax), %xmm3
+	movups	%xmm3, (%rsi)
+	movl	%r11d, %esi
+	movq	%r10, (%rax)
+	movsd	%xmm2, 8(%rax)
 	jmp	.L9
-	.p2align 4,,10
-	.p2align 3
-.L10:
-	movl	%esi, %ecx
-	jmp	.L4
 	.p2align 4,,10
 	.p2align 3
 .L3:
@@ -156,41 +153,41 @@ pq_push:
 	movslq	%esi, %rsi
 	salq	$4, %rsi
 	call	realloc@PLT
+	movq	0(%rbp), %r11
 	movsd	8(%rsp), %xmm0
 	movq	%rax, 8(%r12)
-	movq	0(%rbp), %rax
-	movslq	(%rax), %rcx
+	movslq	(%r11), %rcx
 	leal	1(%rcx), %edx
 	testl	%ecx, %ecx
-	movl	%edx, (%rax)
+	movl	%edx, (%r11)
 	jne	.L17
 	jmp	.L23
 	.p2align 4,,10
 	.p2align 3
 .L19:
-	movslq	%edx, %rcx
+	movslq	%r9d, %rcx
 .L17:
-	leal	-1(%rcx), %esi
-	movq	8(%rax), %rax
+	leal	-1(%rcx), %r8d
+	movq	8(%r11), %rdi
 	salq	$4, %rcx
-	movl	%esi, %edx
-	shrl	$31, %edx
-	addq	%rax, %rcx
-	addl	%esi, %edx
-	sarl	%edx
-	movslq	%edx, %rsi
-	salq	$4, %rsi
-	addq	%rax, %rsi
-	movsd	8(%rsi), %xmm1
+	movl	%r8d, %r9d
+	shrl	$31, %r9d
+	addq	%rdi, %rcx
+	addl	%r8d, %r9d
+	sarl	%r9d
+	movslq	%r9d, %r10
+	salq	$4, %r10
+	addq	%rdi, %r10
+	movsd	8(%r10), %xmm1
 	comisd	%xmm0, %xmm1
 	jbe	.L18
-	movdqu	(%rsi), %xmm2
+	movdqu	(%r10), %xmm2
 	movups	%xmm2, (%rcx)
-	movq	0(%rbp), %rax
-	testl	%edx, %edx
+	movq	0(%rbp), %r11
+	testl	%r9d, %r9d
 	jne	.L19
 .L23:
-	movq	8(%rax), %rcx
+	movq	8(%r11), %rcx
 	jmp	.L18
 	.cfi_endproc
 .LFE19:
