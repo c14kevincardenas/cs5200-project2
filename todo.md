@@ -35,11 +35,11 @@
 		(7 Combos: opLat-issueLat parameters: default-default (n=1000), default-default (n=10), default-default (n=10000), 6-1, 5-2, 4-3, 3-4, 2-5, 1-6)
 - [x] Run bash script to simulate in gem5		(Smita)
 - [x] Display L1$ miss rates results (n=1000)	(Kevin)
-- [ ] Are L1 $ miss rates surprising?			(Kevin)
-- [ ] Which pq- implementation is best?			(Kevin)
+- [x] Are L1 $ miss rates surprising?			(Kevin)
+- [x] Which pq- implementation is best?			(Kevin)
 		(simTime)
 - [x] Repeat for n=10 and n=10000
-- [ ] Which FloatSimd FU prefer?				(Kevin)
+- [x] Which FloatSimd FU prefer?				(Kevin)
 
 ## PART 4
 
@@ -49,7 +49,7 @@
 		(3 Combos: opLat cycles (int-FP) parameters: 2-4, 1-4, 2-2)
 		(issueLat = 1)
 - [x] Run bash script to simulate in gem5		(Smita)
-- [ ] Which one should we halve?				(Kevin)
+- [x] Which one should we halve?				(Kevin)
 
 ## PART 5
 
@@ -57,13 +57,13 @@
 - [x] Locally compile pq-linklist.c 			(Smita)
 - [x] Locally compile pq-minheap.c 				(Smita)
 - [x] Write bash script to run 9+3 combos			(Smita)
-- [ ] Push pq-linklist assembly to GitHub 		(Carlos)
-- [ ] Push pq-minheap assembly to GitHub 		(Carlos)
-- [ ] Examine assembly to ID # unrolls			(Kevin)
+- [x] Push pq-linklist assembly to GitHub 		(Carlos)
+- [x] Push pq-minheap assembly to GitHub 		(Carlos)
+- [x] Examine assembly to ID # unrolls			(Kevin)
 		(main.c and 3x pq-*.c)
 - [x] Repeat Part 3 with new executables		(Smita)
 - [x] Repeat Part 4 with new executables		(Smita)
 - [ ] Repeat Part 3 questions w/ new stats.txt	(Kevin)
 - [ ] Repeat Part 4 questions w/ new stats.txt	(Kevin)
-- [ ] Is loop unrolling good/bad/neutral?		(Kevin)
-- [ ] Did conclusions/design choices change?	(Kevin)
+- [x] Is loop unrolling good/bad/neutral?		(Kevin)
+- [x] Did conclusions/design choices change?	(Kevin)
